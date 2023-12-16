@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[2]:
 
 
 import numpy as np
@@ -360,6 +360,161 @@ print(e)
 
 for item in n.flat:
     print(item)
+
+
+# ## combine array
+
+# In[3]:
+
+
+m = np.array([1,1,1])
+n = np.array([2,2,2])
+print(m,n)
+
+
+# In[5]:
+
+
+c = np.vstack((m,n))   #vertical stack
+print(c)
+
+
+# In[7]:
+
+
+print(m.shape)
+print(n.shape)
+print(c.shape)
+
+
+# In[8]:
+
+
+e = np.hstack((m,n))  # horizontal stack
+print(e)
+print(e.shape)
+
+
+# In[11]:
+
+
+f = m[np.newaxis, :]
+print(f)
+
+
+# In[12]:
+
+
+g = m[: , np.newaxis]
+print(g)
+
+
+# In[14]:
+
+
+h = np.concatenate((m,n,m))
+print(h)
+
+
+# In[19]:
+
+
+i = np.concatenate((m,n,m,n), axis = 0)   #When working with 1D arrays, you can only concatenate them along axis 0
+print(i) 
+
+
+# ## split array
+
+# In[20]:
+
+
+m = np.arange(12).reshape((3,4))
+print(m)
+
+
+# In[22]:
+
+
+a = np.split(m, 2, axis = 1)  #split by column
+print(a)
+
+
+# In[24]:
+
+
+b = np.split(m, 3, axis = 0)  #split by row
+print(b)
+
+
+# In[25]:
+
+
+c = np.array_split(m, 3, axis = 1)
+print(c)
+
+
+# In[27]:
+
+
+d = np.vsplit(m, 3)
+e = np.hsplit(m, 4)
+print(d)
+print(e)
+
+
+# ## Copy & deep copy
+
+# In[28]:
+
+
+a = np.arange(4)
+print(a)
+
+
+# In[35]:
+
+
+b = a
+c = a
+d = b
+
+
+# In[34]:
+
+
+b is a
+
+
+# In[36]:
+
+
+a[0] = 5
+print(a)
+
+
+# In[37]:
+
+
+c is a
+
+
+# In[38]:
+
+
+d is a
+
+
+# In[39]:
+
+
+b = a.copy()   #deep copy
+print(b) 
+
+
+# In[40]:
+
+
+a is b
 
 
 # In[ ]:
