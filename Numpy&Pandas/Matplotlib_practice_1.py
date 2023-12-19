@@ -138,6 +138,154 @@ for label in ax.get_xticklabels() + ax.get_yticklabels():
 plt.show()
 
 
+# # scatter plot
+
+# In[5]:
+
+
+n = 1024
+
+x = np.random.normal(0, 1, n)
+y = np.random.normal(0, 1, n)
+t = np.arctan2(y, x)  # for color value
+
+# scatter
+plt.scatter(x, y, s = 75, c = t, alpha = 0.5)
+
+plt.xlim(-1.5, 1.5)
+plt.ylim(-1.5, 1.5)
+
+plt.xticks(())   # hide x axis value
+plt.yticks(())   # hide y axis value
+plt.show()
+
+
+# # bar chart
+
+# In[11]:
+
+
+# bar chart
+
+n = 12
+x = np.arange(n)
+y1 = (1 - x/float(n)) * np.random.uniform(0.5, 1.0, n)
+y2 = (1 - x/float(n)) * np.random.uniform(0.5, 1.0, n)
+
+plt.bar(x, + y1, facecolor = '#9999ff', edgecolor = 'white')
+plt.bar(x, - y2, facecolor = '#ff9999', edgecolor = 'white')
+
+# add annotation
+for i in range(len(x)):
+    # ha stands for horizontal alignment
+    plt.text(x[i], y1[i] + 0.05, '%.2f' % y1[i], ha='center', va='bottom')
+
+
+for i in range(len(x)):
+    plt.text(x[i], -y2[i] - 0.05, '- %.2f' % y2[i], ha='center', va='top')
+    
+plt.xlim(-5, n)
+plt.ylim(-1.25, 1.25)
+
+# hide x and y ticks
+plt.xticks(())
+plt.yticks(())
+
+plt.show()
+
+
+# # contours
+
+# In[14]:
+
+
+# the height function
+def f(x, y):
+    return (1 - x/2 + x**5 + y**3) * np.exp(-x**2 - y**2)
+
+n = 256
+x = np.linspace(-3, 3, n)
+y = np.linspace(-3, 3, n)
+
+X, Y = np.meshgrid(x, y)
+
+# filling contours
+plt.contourf(X, Y, f(X, Y), 8, cmap = plt.cm.hot)
+
+# add contour lines
+C = plt.contour(X, Y, f(X, Y), 8, colors = 'black', linewidths = 0.5)
+
+# add labels
+plt.clabel(C, inline = True, fontsize = 10)
+
+# hide x and y ticks
+plt.xticks(())
+plt.yticks(())
+
+plt.show()
+
+
+# In[19]:
+
+
+# image
+
+# image data
+a = np.array([0.313660827978, 0.365348418405, 0.423733120134,
+              0.365348418405, 0.439599930621, 0.525083754405,
+              0.423733120134, 0.525083754405, 0.651536351379]).reshape(3,3)
+
+"""
+for the value of "interpolation", check this:
+http://matplotlib.org/examples/images_contours_and_fields/interpolation_methods.html
+for the value of "origin"= ['upper', 'lower'], check this:
+http://matplotlib.org/examples/pylab_examples/image_origin.html
+"""
+plt.imshow(a, interpolation = 'nearest', cmap = 'bone', origin = 'lower')
+
+# add colorbar
+plt.colorbar(shrink = 0.9)
+
+# hide x and y ticks
+plt.xticks(())
+plt.yticks(())
+
+plt.show()
+
+
+# In[29]:
+
+
+# 3D image
+
+# import 3D model
+from mpl_toolkits.mplot3d import Axes3D
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')  # Updated way to add a 3D subplot
+
+# X, Y value
+X = np.arange(-4, 4, 0.25)
+Y = np.arange(-4, 4, 0.25)
+X, Y = np.meshgrid(X, Y)
+R = np.sqrt(X**2 + Y**2)
+
+# height value
+Z = np.sin(R)
+
+# Surface plot with stride and custom colormap
+ax.plot_surface(X, Y, Z, rstride = 1, cstride = 1, cmap = plt.get_cmap('rainbow'))
+
+# Contour plot beneath the surface plot with 'rainbow' colormap
+# 'zdir' indicates which axis to project onto, 'offset' is the z position for the contour
+ax.contourf(X, Y, Z, zdir='z', offset=-2, cmap=plt.get_cmap('rainbow'))
+
+# Setting the limits for the z-axis
+ax.set_zlim(-2, 2)
+
+plt.show()
+
+
 # In[ ]:
 
 
