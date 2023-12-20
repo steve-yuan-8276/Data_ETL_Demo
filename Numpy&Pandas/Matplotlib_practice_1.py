@@ -286,6 +286,198 @@ ax.set_zlim(-2, 2)
 plt.show()
 
 
+# ## Subplot
+
+# In[30]:
+
+
+plt.figure()
+
+# subplot 1
+plt.subplot(2, 2, 1)
+plt.plot([0, 1], [0, 1])
+
+# subplot 2
+plt.subplot(2, 2, 2)
+plt.plot([0, 1], [0, 1])
+
+# subplot 3
+plt.subplot(2, 2, 3)
+plt.plot([0, 1], [0, 1])
+
+# subplot 4
+plt.subplot(2, 2, 4)
+plt.plot([0, 1], [0, 1])
+
+plt.show()
+
+
+# In[32]:
+
+
+plt.figure()
+
+# subplot 1
+plt.subplot(2, 1, 1)
+plt.plot([0, 1], [0, 1])
+
+# subplot 2
+plt.subplot(2, 3, 4)
+plt.plot([0, 1], [0, 1])
+
+# subplot 3
+plt.subplot(2, 3, 5)
+plt.plot([0, 1], [0, 1])
+
+# subplot 4
+plt.subplot(2, 3, 6)
+plt.plot([0, 1], [0, 1])
+
+plt.show()
+
+
+# ## subplot 2 grid
+
+# In[36]:
+
+
+plt.figure()
+ax1 = plt.subplot2grid((3, 3), (0, 0), colspan = 3, rowspan = 1)
+ax1.plot([1, 2], [1, 2])
+ax1.set_title('ax_title')
+ax2 = plt.subplot2grid((3, 3), (1, 0), colspan = 2)
+ax3 = plt.subplot2grid((3, 3), (1, 2), rowspan = 2)
+ax4 = plt.subplot2grid((3, 3), (2, 0))
+ax5 = plt.subplot2grid((3, 3), (2, 1))
+
+plt.show()
+
+
+# ## gridspec
+
+# In[38]:
+
+
+# import gridspec model
+import matplotlib.gridspec as gridspec
+
+plt.figure()
+
+gs = gridspec.GridSpec(3, 3)
+
+ax1 = plt.subplot(gs[0, :])
+
+ax2 = plt.subplot(gs[1, :2])
+
+ax3 = plt.subplot(gs[1:, 2])
+
+ax4 = plt.subplot(gs[-1, 0])
+
+ax5 = plt.subplot(gs[-1, -2])
+
+plt.show()
+
+
+# ## subplots
+
+# In[40]:
+
+
+f, ((ax11, ax12), (ax21, ax22)) =plt.subplots(2, 2, sharex = True, sharey = True)
+ax11.scatter([1, 2], [1, 2])
+
+plt.show()
+
+
+# ## image in image
+
+# In[46]:
+
+
+# import gridspec model
+import matplotlib.gridspec as gridspec
+
+fig = plt.figure()
+
+x = [1, 2, 3, 4, 5, 6, 7]
+y = [1, 3, 4, 2, 5, 8, 6]
+
+left, bottom, width, height = 0.1, 0.1, 0.8, 0.8
+ax1 = fig.add_axes([left, bottom, width, height])
+ax1.plot(x, y, 'r')
+ax1.set_xlabel('x')
+ax1.set_ylabel('y')
+ax1.set_title('title')
+
+left, bottom, width, height = 0.2, 0.6, 0.25, 0.25
+ax2 = fig.add_axes([left, bottom, width, height])
+ax2.plot(x, y, 'b')
+ax2.set_xlabel('x')
+ax2.set_ylabel('y')
+ax2.set_title('title inside 1')
+
+plt.axes([0.6, 0.2, 0.25, 0.25])
+plt.plot(y[::-1], x, 'g')
+plt.xlabel('x')
+plt.xlabel('y')
+
+
+plt.show()
+
+
+# ## primary and secondry axis
+
+# In[50]:
+
+
+x = np.arange(0, 10, 0.1)
+y1 = 0.05 * x**2
+y2 = -1 * y1
+
+fig, ax1 = plt.subplots()
+ax2 = ax1.twinx()
+ax1.plot(x, y1, 'g-')
+ax2.plot(x, y2, 'b-')
+
+ax1.set_xlabel('X data')
+ax1.set_ylabel('Y1', color = 'g')
+ax1.set_ylabel('Y2', color = 'b')
+
+plt.show()
+
+
+# ## animation
+
+# In[54]:
+
+
+# import anamation model
+from matplotlib import animation
+
+fig, ax = plt.subplots()
+
+x = np.arange(0, 2*np.pi, 0.01)
+line, = ax.plot(x, np.sin(x))
+
+def animate(i):
+    line.set_ydata(np.sin(x + i/10))
+    return line,
+
+def init():
+    line.set_ydata(np.sin(x))
+    return line,
+
+ani = animation.FuncAnimation(fig = fig, func = animate, frames = 100, init_func = init, interval = 20, blit = False )
+
+plt.show()
+
+
+# In[ ]:
+
+
+
+
+
 # In[ ]:
 
 
