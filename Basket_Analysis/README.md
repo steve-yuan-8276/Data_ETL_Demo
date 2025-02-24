@@ -1,4 +1,4 @@
-# **README - Tableau Prep Workflow for Association Rule Mining**
+# Tableau Prep Workflow for Association Rule Mining
 
 ## **Overview**
 This Tableau Prep workflow is designed to clean and preprocess order transaction data from multiple regions (**South, East, West, Central**) before applying **association rule mining**. The goal is to transform the data into a structured format suitable for **Apriori algorithm-based market basket analysis**. The workflow includes **data cleaning**, **standardization**, **merging**, and **association rule extraction**.
